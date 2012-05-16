@@ -706,7 +706,7 @@ if( ! class_exists( 'user_access' ) )
 					$upload_user = empty( $_POST['new_upload'][$i] ) ? 0 : 1 ;
 					if( empty( $uid ) ) {
 						//require_once XOOPS_ROOT_PATH.'/class/criteria.php' ;
-						$criteria =& new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
+						$criteria = new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
 						@list( $user ) = $member_handler->getUsers( $criteria ) ;
 					} else {
 						$user =& $member_handler->getUser( intval( $uid ) ) ;
@@ -894,7 +894,7 @@ if( ! class_exists( 'user_access' ) )
 				if( empty( $value ) ) continue ;
 				if( ! empty( $_POST['new_uids'][$i] ) ) $select_user = intval( @$_POST['new_uids'][$i] ) ;
 				if( empty( $select_user ) ) {
-					$criteria =& new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
+					$criteria = new Criteria( 'uname' , addslashes( @$_POST['new_unames'][$i] ) ) ;
 					@list( $user ) = $member_handler->getUsers( $criteria ) ;
 				} else {
 					$user =& $member_handler->getUser( $select_user ) ;

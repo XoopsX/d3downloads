@@ -32,7 +32,7 @@ if( stristr( $_SERVER['HTTP_USER_AGENT'] , 'Opera' ) ) {
 }
 
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$tpl =& new XoopsTpl() ;
+$tpl = new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname'      => $mydirname ,
 	'mod_url'        => XOOPS_URL.'/modules/'.$mydirname ,

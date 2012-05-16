@@ -54,7 +54,7 @@ if (! function_exists('b_d3downloads_download_show') ) {
 			$block['lang_broken'] = _MB_D3DOWNLOADS_BROKEN_FILE;
 			if( empty( $options['disable_renderer'] ) ) {
 				require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-				$tpl =& new XoopsTpl() ;
+				$tpl = new XoopsTpl() ;
 				$tpl->assign( 'block' , $block ) ;
 				$ret['content'] = $tpl->fetch( $this_template ) ;
 				return $ret ;
@@ -90,7 +90,7 @@ if (! function_exists('b_d3downloads_download_edit') ) {
 		}
 
 		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-		$tpl =& new XoopsTpl() ;
+		$tpl = new XoopsTpl() ;
 		$tpl->assign( array(
 			'mydirname' => $mydirname ,
 			'download' => $downloaddata ,

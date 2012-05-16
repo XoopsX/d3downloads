@@ -38,7 +38,7 @@ if (! function_exists('b_d3downloads_recent_show') ) {
 
 			if( empty( $options['disable_renderer'] ) ) {
 				require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-				$tpl =& new XoopsTpl() ;
+				$tpl = new XoopsTpl() ;
 				$tpl->assign( 'block' , $block ) ;
 				$ret['content'] = $tpl->fetch( $this_template ) ;
 				return $ret ;
@@ -75,7 +75,7 @@ if (! function_exists('b_d3downloads_recent_edit') ) {
 		if( preg_match( '/[^0-9a-zA-Z_-]/' , $mydirname ) ) die( 'Invalid mydirname' ) ;
 
 		require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-		$tpl =& new XoopsTpl() ;
+		$tpl = new XoopsTpl() ;
 		$tpl->assign( array(
 			'mydirname' => $mydirname ,
 			'max_entry' => $max_entry ,

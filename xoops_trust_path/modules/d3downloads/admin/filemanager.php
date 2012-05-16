@@ -168,7 +168,7 @@ if( ! empty( $_POST['copy'] ) ) {
 xoops_cp_header();
 include dirname(__FILE__).'/mymenu.php' ;
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$tpl =& new XoopsTpl() ;
+$tpl = new XoopsTpl() ;
 $tpl->assign( array(
 	'mod_url' => XOOPS_URL.'/modules/'.$mydirname ,
 	'page' => 'filemanager' ,

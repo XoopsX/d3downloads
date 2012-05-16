@@ -140,7 +140,7 @@ function d3downloads_onupdate_base( $module , $mydirname )
 	if( ! $db->query( $check_sql ) ) {
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_cat")." ADD cids_child text AFTER path" ) ;
 		d3download_make_serialize_data( $mydirname ) ;
-		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_mylink")." ( `uid` mediumint(8) default NULL,`cids` text,`date` int(10) NOT NULL default '0',UNIQUE KEY  (`uid`), KEY (`date`) ) TYPE=MyISAM" ) ;
+		$db->queryF( "CREATE TABLE ".$db->prefix($mydirname."_mylink")." ( `uid` mediumint(8) default NULL,`cids` text,`date` int(10) NOT NULL default '0',UNIQUE KEY  (`uid`), KEY (`date`) ) ENGINE=MyISAM" ) ;
 		$db->queryF( "ALTER TABLE ".$db->prefix($mydirname."_downloads")."  ADD mylink int(11) unsigned NOT NULL default '0' AFTER votes" ) ;
 	}
 

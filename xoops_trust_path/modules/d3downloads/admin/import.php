@@ -91,7 +91,7 @@ if( ! empty( $_POST['do_import'] ) && ! empty( $_POST['import_mid'] ) ) {
 xoops_cp_header();
 include dirname(__FILE__).'/mymenu.php' ;
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$tpl =& new XoopsTpl() ;
+$tpl = new XoopsTpl() ;
 $tpl->assign( array(
 	'mydirname' => $mydirname ,
 	'mod_name' => $xoopsModule->getVar('name') ,

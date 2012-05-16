@@ -39,7 +39,7 @@ if( ! empty( $_POST['update'] ) ) {
 xoops_cp_header();
 include dirname(__FILE__).'/mymenu.php' ;
 require_once XOOPS_ROOT_PATH.'/class/template.php' ;
-$tpl =& new XoopsTpl() ;
+$tpl = new XoopsTpl() ;
 $tpl->assign( array(
 	'gticket_hidden' => $xoopsGTicket->getTicketHtml( __LINE__ , 1800 , 'd3downloads') ,
 ) ) ;
