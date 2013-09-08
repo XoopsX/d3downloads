@@ -154,7 +154,7 @@ if ( ! function_exists('d3download_submit_execution') ) {
 				$ext2 = '' ;
 			}
 
-			// “o˜^Ï‚ÌƒŠƒ“ƒN“o˜^‚ğ‚¨’f‚è
+			// ç™»éŒ²æ¸ˆã®ãƒªãƒ³ã‚¯ç™»éŒ²ã‚’ãŠæ–­ã‚Š
 			if( ! empty( $check_url ) ){
 				switch( $mode ) {
 					case 'submit' :
@@ -167,7 +167,7 @@ if ( ! function_exists('d3download_submit_execution') ) {
 				if( ! empty( $check_url_result ) ) $error_message .= $check_url_result . '<br />' ;
 			}
 
-			// ³”F‘Ò‚¿‚ÌÄ“o˜^‚Í‚¨’f‚è
+			// æ‰¿èªå¾…ã¡ã®å†ç™»éŒ²ã¯ãŠæ–­ã‚Š
 			switch( $mode ) {
 				case 'submit' :
 					$check_unapproval_result =  $submit_validate->Validate_check_unapproval( $url ) ;
@@ -179,7 +179,7 @@ if ( ! function_exists('d3download_submit_execution') ) {
 			if( ! empty( $check_unapproval_result ) ) $error_message .= $check_unapproval_result . '<br />' ;
 		} 
 
-		// LiveValidation‚É‚æ‚éValidation ‚ª—LŒø‚É‚È‚ç‚È‚¢ŠÂ‹«‚ğl—¶‚µA‚±‚±‚Å‚à“ü—Íƒ`ƒFƒbƒN
+		// LiveValidationã«ã‚ˆã‚‹Validation ãŒæœ‰åŠ¹ã«ãªã‚‰ãªã„ç’°å¢ƒã‚’è€ƒæ…®ã—ã€ã“ã“ã§ã‚‚å…¥åŠ›ãƒã‚§ãƒƒã‚¯
 		if( $mode != 'approval' ) $validate_result = $submit_validate->Validate( $url, $filename, $file2, $filename2 ) ;
 		else $validate_result = $submit_validate->Validate( $post_url, $post_filename, $post_file2, $post_filename2, 1 ) ;
 		if( $mode != 'approval' ){
@@ -337,7 +337,7 @@ if ( ! function_exists('d3download_modfile_insertdb') ) {
 		$error = 0 ;
 		foreach ( $myparams as $key=>$value ){ $$key = $value; }
 
-		// LID‚ğæ“¾‚Å‚«‚È‚©‚Á‚½ê‡‚Í‚¨’f‚è
+		// LIDã‚’å–å¾—ã§ããªã‹ã£ãŸå ´åˆã¯ãŠæ–­ã‚Š
 		if( empty( $lid ) ) {
 			redirect_header( XOOPS_URL."/modules/$mydirname/index.php" , 2 , _MD_D3DOWNLOADS_ERROR_MESSEAGE_NOID ) ;
 			exit();
@@ -493,7 +493,8 @@ if ( ! function_exists('d3download_file_manager_data_update') ) {
 				$errors[] = $id ;
 			} else {
 				$lid = intval( $id ) ;
-				$title = mysql_real_escape_string( $myts->stripSlashesGPC( @$_POST['title'][$id] ) ) ;
+				$title = $db->quoteString( $myts->stripSlashesGPC( @$_POST['title'][$id] ) ) ;
+				$title = trim($title, $title[0]);
 				$visible = empty( $_POST['visible'][$id] ) ? 0 : 1 ;
 				$cancomment = empty( $_POST['comment'][$id] ) ? 0 : 1 ;
 				$set4sql = "lid='".$lid."'" ;
@@ -546,7 +547,8 @@ if ( ! function_exists('d3download_categorymanager_data_update') ) {
 				$errors[] = $id ;
 			} else {
 				$cid = intval( $id ) ;
-				$title = mysql_real_escape_string( $myts->stripSlashesGPC( @$_POST['title'][$id] ) ) ;
+				$title = $db->quoteString( $myts->stripSlashesGPC( @$_POST['title'][$id] ) ) ;
+				$title = trim($title, $title[0]);
 				$cat_weight = intval( $weights ) ;
 				$set4sql = "cid='".$cid."'" ;
 				foreach( $array4sql as $key ) {
