@@ -10,7 +10,7 @@ $langman->read( 'modinfo.php' , $mydirname , $mytrustdirname , false ) ;
 $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
-$modversion['version'] = 1.48 ;
+$modversion['version'] = 1.49 ;
 $modversion['description'] = constant($constpref.'_DESC') ;
 $modversion['credits'] = "Xoops X(ten) Team and photosite";
 $modversion['author'] = "Xoops X(ten) Team based by photosite(http://www.photositelinks.com/)" ;
