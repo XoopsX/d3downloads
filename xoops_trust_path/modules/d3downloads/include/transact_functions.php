@@ -494,7 +494,7 @@ if ( ! function_exists('d3download_file_manager_data_update') ) {
 			} else {
 				$lid = intval( $id ) ;
 				$title = $db->quoteString( $myts->stripSlashesGPC( @$_POST['title'][$id] ) ) ;
-				$title = trim($title, $title[0]);
+				$title = substr($title, 1, strlen($title)-2);
 				$visible = empty( $_POST['visible'][$id] ) ? 0 : 1 ;
 				$cancomment = empty( $_POST['comment'][$id] ) ? 0 : 1 ;
 				$set4sql = "lid='".$lid."'" ;
@@ -548,7 +548,7 @@ if ( ! function_exists('d3download_categorymanager_data_update') ) {
 			} else {
 				$cid = intval( $id ) ;
 				$title = $db->quoteString( $myts->stripSlashesGPC( @$_POST['title'][$id] ) ) ;
-				$title = trim($title, $title[0]);
+				$title = substr($title, 1, strlen($title)-2);
 				$cat_weight = intval( $weights ) ;
 				$set4sql = "cid='".$cid."'" ;
 				foreach( $array4sql as $key ) {
