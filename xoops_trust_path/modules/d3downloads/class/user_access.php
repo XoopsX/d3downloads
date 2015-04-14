@@ -19,7 +19,7 @@ if( ! class_exists( 'user_access' ) )
 			include_once dirname( dirname(__FILE__) ).'/include/mytable.php' ;
 
 			$this->db =& Database::getInstance() ;
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->mydirname = $mydirname ;
 			$this->table = $this->db->prefix( "{$mydirname}_user_access" ) ;
 			$this->cat_table = $this->db->prefix( "{$mydirname}_cat" ) ;

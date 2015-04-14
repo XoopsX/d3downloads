@@ -305,7 +305,7 @@ if ( ! function_exists('d3download_delete_lid') ) {
 			$file2 = htmlspecialchars( $fil2 , ENT_QUOTES ) ;
 			$submitter = intval( $uid ) ;
 
-			// u“Še‚ðƒ†[ƒU[‚Ì“Še”‚É”½‰fv‚ª—LŒø‚Èê‡A“Še”‚É”½‰f
+			// ï¿½uï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½Ì“ï¿½ï¿½eï¿½ï¿½ï¿½É”ï¿½ï¿½fï¿½vï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½Èê‡ï¿½Aï¿½ï¿½ï¿½eï¿½ï¿½ï¿½É”ï¿½ï¿½f
 			if( $submitter > 0 && ! empty( $mod_config['plus_posts'] ) ) {
 				d3download_decrementPost( $submitter ) ;
 			}
@@ -556,7 +556,7 @@ if ( ! function_exists('d3download_get_submenu_option') ) {
 	function d3download_get_submenu_option( $mydirname )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 
 		$mytrustdirpath = dirname( dirname( __FILE__ ) ) ;
 		$mytrustdirname = basename( $mytrustdirpath ) ;
@@ -589,7 +589,7 @@ if ( ! function_exists('d3download_get_categories_for_submenu') ) {
 	function d3download_get_categories_for_submenu( $mydirname, $whr )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$db =& Database::getInstance() ;
 
 		$categories = array( 0 => array( 'name' => '' , 'url' => '' , 'sub' => array() ) ) ;
@@ -705,7 +705,7 @@ if ( ! function_exists('d3download_delete_nullbyte') ) {
 	function d3download_delete_nullbyte( $arr )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		return $myts->Delete_Nullbyte( $arr ) ;
 	}
 }

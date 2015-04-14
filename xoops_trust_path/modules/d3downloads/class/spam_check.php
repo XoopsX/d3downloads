@@ -21,7 +21,7 @@ if( ! class_exists( 'spam_check' ) )
 		{
 			global $xoopsUser ;
 
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->xoops_isuser = ( is_object( $xoopsUser ) ) ? true : false ;
 			$this->my_session   = $mydirname.'_spam_check' ;
 			$this->str_list     = array_merge( range( 'a', 'z' ), range( 'A', 'Z' ), range( 0, 9 ) ) ;

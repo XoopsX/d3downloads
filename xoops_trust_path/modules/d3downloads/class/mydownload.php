@@ -54,7 +54,7 @@ if( ! class_exists( 'MyDownload' ) )
 			include_once dirname( dirname(__FILE__) ).'/include/mytable.php' ;
 
 			$this->db =& Database::getInstance() ;
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->mydirname = $mydirname ;
 			$this->mod_url = XOOPS_URL.'/modules/'.$mydirname ;
 			$this->table = $this->db->prefix( "{$mydirname}_downloads" ) ;
@@ -1067,7 +1067,7 @@ if( ! class_exists( 'MyDownload' ) )
 
 			if ( ! preg_match("`^(https?|ftp)://`i", $url ) ) {
 				if( ! $this->check_file( $url ) ){
-					// ƒtƒ@ƒCƒ‹”j‘¹‚Ìê‡‚ÍƒŠƒ“ƒN‚ð•\Ž¦‚µ‚È‚¢
+					// ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½jï¿½ï¿½ï¿½Ìê‡ï¿½Íƒï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 					$broken_link = 1 ;
 					$gif_image = "" ;
 				} else {
@@ -1448,7 +1448,7 @@ if( ! class_exists( 'MyDownload' ) )
 
 		function config_d3comment()
 		{
-			// ƒRƒƒ“ƒg“‡‚ÌÝ’è‚ð‚µ‚Ä‚¢‚È‚¢ê‡‚ÍuƒRƒƒ“ƒgv‚ÌƒŠƒ“ƒN‚ð•\Ž¦‚µ‚È‚¢
+			// ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ÌÝ’ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Íuï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½vï¿½Ìƒï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 			if ( ! empty ( $this->mod_config['comment_dirname'] ) && ! empty ( $this->mod_config['comment_forum_id'] ) ){
 				return true ;
 			} else {

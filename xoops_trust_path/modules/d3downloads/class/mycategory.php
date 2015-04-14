@@ -35,7 +35,7 @@ if( ! class_exists( 'MyCategory' ) )
 			include_once dirname( dirname(__FILE__) ).'/include/mytable.php' ;
 
 			$this->db =& Database::getInstance();
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->mydirname = $mydirname ;
 			$this->cat_table = $this->db->prefix( "{$mydirname}_cat" ) ;
 			$this->downloads_table = $this->db->prefix( "{$mydirname}_downloads" ) ;

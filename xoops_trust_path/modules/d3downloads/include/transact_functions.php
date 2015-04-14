@@ -481,7 +481,7 @@ if ( ! function_exists('d3download_file_manager_data_update') ) {
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
 
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$db =& Database::getInstance() ;
 
 		$_POST = $myts->Delete_Nullbyte( $_POST );
@@ -533,7 +533,7 @@ if ( ! function_exists('d3download_categorymanager_data_update') ) {
 	function d3download_categorymanager_data_update( $mydirname )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$db =& Database::getInstance() ;
 
 		// DELETE NULLBYTE

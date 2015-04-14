@@ -12,7 +12,7 @@ if( ! class_exists( 'd3downloadsComment' ) )
 			require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
 
 			$db =& Database::getInstance() ;
-			$myts =& d3downloadsTextSanitizer::getInstance() ;
+			$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 
 			$module_handler =& xoops_gethandler( 'module' ) ;
 			$module =& $module_handler->getByDirname( $this->mydirname ) ;

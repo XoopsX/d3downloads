@@ -5,7 +5,7 @@ if ( ! function_exists('d3download_get_module_header_request') ) {
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
 
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$template = $file_path = $type = '' ;
 
 		$_GET = $myts->Delete_Nullbyte( $_GET ) ;
@@ -191,7 +191,7 @@ if ( ! function_exists('d3download_ajax_load') ) {
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
 
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$_GET = $myts->Delete_Nullbyte( $_GET ) ;
 
 		$array = array( 'is_file' , 'check_url' , 'check_unapproval' , 'ratefile_check' , 'category_form_validate' , 'logourl_load' , 'str_load' , 'cansel' , 'change_editor' , 'is_fckeditor' ) ;

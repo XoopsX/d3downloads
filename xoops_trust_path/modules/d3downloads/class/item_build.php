@@ -31,7 +31,7 @@ if( ! class_exists( 'Item_build' ) )
 			include_once dirname( dirname(__FILE__) ).'/include/mytable.php' ;
 
 			$this->db =& Database::getInstance();
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->table = $this->db->prefix( "{$mydirname}_downloads" ) ;
 			$this->cat_table = $this->db->prefix( "{$mydirname}_cat" ) ;
 			$this->mylink_table = $this->db->prefix( "{$mydirname}_mylink" ) ;

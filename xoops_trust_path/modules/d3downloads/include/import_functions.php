@@ -13,7 +13,7 @@ if ( ! function_exists('d3download_import_from_mydownloads') ) {
 	function d3download_import_from_mydownloads( $mydirname , $import_mid )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$db =& Database::getInstance() ;
 		$import_mid = intval( $import_mid ) ;
 
@@ -231,7 +231,7 @@ if ( ! function_exists('d3download_copy_converturl_for_import') ) {
 	function d3download_copy_converturl_for_import( $mydirname, $from_dirname )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$db =& Database::getInstance() ;
 
 		$result = $db->query("SELECT lid, url, file2 FROM ".$db->prefix( $mydirname."_downloads" )."");
@@ -285,7 +285,7 @@ if (! function_exists('d3download_convert_from_wfdownloads')) {
 	function d3download_convert_from_wfdownloads( $mydirname, $target_dirname )
 	{
 		require_once dirname( dirname(__FILE__) ).'/class/d3downloads.textsanitizer.php' ;
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		$db =& Database::getInstance() ;
 
 		$module_handler =& xoops_gethandler('module');

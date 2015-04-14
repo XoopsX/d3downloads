@@ -36,7 +36,7 @@ if( ! class_exists( 'broken_download' ) )
 			include_once dirname( dirname(__FILE__) ).'/include/mytable.php' ;
 
 			$this->db =& Database::getInstance() ;
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->broken_table = $this->db->prefix( "{$mydirname}_broken" ) ;
 			$this->table = $this->db->prefix( "{$mydirname}_downloads" ) ;
 			$this->mydirname = $mydirname ;
@@ -274,7 +274,7 @@ if( ! class_exists( 'broken_report' ) )
 
 			$this->mydirname = $mydirname ;
 			$this->db =& Database::getInstance() ;
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->check_config = $this->get_option_config( 'broken_check_config' ) ;
 			$this->http = $this->My_HTTP() ;
 			$this->broken_table = $this->db->prefix( "{$mydirname}_broken" ) ;

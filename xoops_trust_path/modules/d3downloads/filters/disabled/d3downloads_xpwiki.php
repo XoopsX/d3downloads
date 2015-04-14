@@ -8,33 +8,33 @@ if ( ! function_exists('d3downloads_xpwiki') ) {
 		if ( ! class_exists( 'd3downloadsTextSanitizer' ) ) {
 			require_once dirname( dirname( dirname(__FILE__) ) ).'/class/d3downloads.textsanitizer.php' ;
 		}
-		$myts =& d3downloadsTextSanitizer::getInstance() ;
+		$myts =& d3downloadsTextSanitizer::sGetInstance() ;
 		if ( ! class_exists( 'XpWiki' ) ) {
 			@ include_once XOOPS_TRUST_PATH.'/modules/xpwiki/include.php' ;
 		}
 		if( ! class_exists( 'XpWiki' ) ) die( 'xpWiki is not installed correctly' ) ;
 
 		// Get instance. option is xpWiki module's directory name.
-		// °ú¿ô¤Ï¡¢xpWiki¤ò¥¤¥ó¥¹¥È¡¼¥ë¤·¤¿¥Ç¥£¥ì¥¯¥È¥êÌ¾¤Ç¤¹¡£
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½xpWikiï¿½ò¥¤¥ó¥¹¥È¡ï¿½ï¿½ë¤·ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½ì¥¯ï¿½È¥ï¿½Ì¾ï¿½Ç¤ï¿½ï¿½ï¿½
 		$wiki =& XpWiki::getSingleton( 'xpwiki' );
 	
-		// xpWiki ¤ÎÆ°ºî¤ò·èÄê¤¹¤ëÀßÄêÃÍ¤òÊÑ¹¹¤Ç¤­¤Þ¤¹¡£
+		// xpWiki ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½ê¤¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¤ï¿½ï¿½Ñ¹ï¿½ï¿½Ç¤ï¿½ï¿½Þ¤ï¿½ï¿½ï¿½
 		// $wiki->setIniConst( '[KEY]' , '[VALUE]' ); // $wiki->root->[KEY] = [VALUE];
 		// $wiki->setIniRoot( '[KEY]' , '[VALUE]' );  // $wiki->cont->[KEY] = [VALUE];
 	
-		// ex, ²þ¹Ô¤òÍ­¸ú¤Ë¤¹¤ë
+		// ex, ï¿½ï¿½ï¿½Ô¤ï¿½Í­ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½
 		$wiki->setIniRoot( 'line_break' , 1 );
-		// ex. ¥ì¥ó¥À¥ê¥ó¥°¥­¥ã¥Ã¥·¥å¤ò¤¹¤ë
+		// ex. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¥°¥ï¿½ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ò¤¹¤ï¿½
 		$wiki->setIniRoot( 'render_use_cache' , 1 );
-		// ex. ¥ì¥ó¥À¥ê¥ó¥°¥­¥ã¥Ã¥·¥å¤ÎÍ­¸ú´ü¸Â¤Ï¿·¤¿¤Ë¥Ú¡¼¥¸¤¬ºîÀ®¤µ¤ì¤ë¤Þ¤Ç
-		$wiki->setIniRoot( 'render_cache_min' , 0 ); // ¥­¥ã¥Ã¥·¥åÍ­¸ú»þ´Ö(Ê¬)
-		// ex. ³°Éô¥ê¥ó¥¯¤Î target Â°À­ '_blank'
+		// ex. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¥°¥ï¿½ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½Í­ï¿½ï¿½ï¿½ï¿½ï¿½Â¤Ï¿ï¿½ï¿½ï¿½ï¿½Ë¥Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¤ï¿½
+		$wiki->setIniRoot( 'render_cache_min' , 0 ); // ï¿½ï¿½ï¿½ï¿½Ã¥ï¿½ï¿½ï¿½Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ê¬)
+		// ex. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó¥¯¤ï¿½ target Â°ï¿½ï¿½ '_blank'
 		$wiki->setIniRoot( 'link_target' , '_blank' );
 	
 		if ($html != 1) {
- 			// ÂèÆó°ú¿ô¤Ï¡¢xpWiki¤ÎCSS¤òÅ¬ÍÑ¤¹¤ë¤¿¤á¤ÎDIV¥¯¥é¥¹Ì¾
-			// ÄÌ¾ï¥¤¥ó¥¹¥È¡¼¥ë¤·¤¿¥Ç¥£¥ì¥¯¥È¥êÌ¾¤Ç¤¹¡£
-			// CSS ¤òÅ¬ÍÑ¤·¤Ê¤¤¾ì¹ç¤Ï¶õÇò '' ¤ÇOK¡£
+ 			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½xpWikiï¿½ï¿½CSSï¿½ï¿½Å¬ï¿½Ñ¤ï¿½ï¿½ë¤¿ï¿½ï¿½ï¿½DIVï¿½ï¿½ï¿½é¥¹Ì¾
+			// ï¿½Ì¾ï¥¤ï¿½ó¥¹¥È¡ï¿½ï¿½ë¤·ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½ì¥¯ï¿½È¥ï¿½Ì¾ï¿½Ç¤ï¿½ï¿½ï¿½
+			// CSS ï¿½ï¿½Å¬ï¿½Ñ¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ '' ï¿½ï¿½OKï¿½ï¿½
 			$text = $wiki->transform( $text , 'xpwiki' ) ;
 		} else {
 			$text = $myts->codePreConv( $text, $xcode ) ;

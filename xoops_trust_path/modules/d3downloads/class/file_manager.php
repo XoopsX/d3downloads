@@ -27,7 +27,7 @@ if( ! class_exists( 'file_manager' ) )
 		{
 			include_once dirname( dirname(__FILE__) ).'/include/mytable.php' ;
 			$this->db =& Database::getInstance();
-			$this->myts =& d3downloadsTextSanitizer::getInstance() ;
+			$this->myts =& d3downloadsTextSanitizer::sGetInstance() ;
 			$this->table = $this->db->prefix( "{$mydirname}_downloads" ) ;
 			$this->cat_table = $this->db->prefix( "{$mydirname}_cat" ) ;
 			$this->broken_table = $this->db->prefix( "{$mydirname}_broken" ) ;
