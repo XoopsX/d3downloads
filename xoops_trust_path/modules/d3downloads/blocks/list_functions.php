@@ -5,7 +5,7 @@ if (! function_exists('b_d3downloads_list_show') ) {
 	{
 		global $xoopsConfig ;
 		$db =& Database::getInstance() ;
-		$myts =& MyTextSanitizer::getInstance() ;
+		(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance() ;
 
 		include_once dirname( dirname(__FILE__) ).'/class/user_access.php' ;
 		include_once dirname( dirname(__FILE__) ).'/class/block_download.php' ;

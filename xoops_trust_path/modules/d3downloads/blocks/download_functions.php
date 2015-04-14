@@ -71,7 +71,7 @@ if (! function_exists('b_d3downloads_download_edit') ) {
 		require_once dirname( dirname(__FILE__) ).'/include/common_functions.php' ;
 
 		$db =& Database::getInstance() ;
-		$myts =& MyTextSanitizer::getInstance() ;
+		(method_exists('MyTextSanitizer', 'sGetInstance') and $myts =& MyTextSanitizer::sGetInstance()) || $myts =& MyTextSanitizer::getInstance() ;
 		$mydirname = empty( $options[0] ) ? 'd3downloads' : $options[0] ;
 		$download_id = intval( @$options[1] ) ;
 		$this_template = empty( $options[2] ) ? 'db:'.$mydirname.'_block_download.html' : trim( $options[2] ) ;
