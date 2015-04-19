@@ -131,7 +131,7 @@ if( ! class_exists( 'broken_download' ) )
 			) ;
 		}
 
-		function Total_Num()
+		function Total_Num( $whr='', $cid=0, $all=0, $invisible=0, $intree=0 )
 		{
 			$sql = "SELECT COUNT( reportid ) FROM ".$this->broken_table."";
 			$result = $this->db->query( $sql ) ;
@@ -188,7 +188,7 @@ if( ! class_exists( 'broken_download' ) )
 			}
 		}
 
-		function mail_link( $sender )
+		function mail_link( $sender, $cid=1, $block=0  )
 		{
 			require_once dirname( dirname(__FILE__) ).'/class/post_check.php' ;
 			$post_check = new Post_Check() ;

@@ -35,7 +35,7 @@ if( ! class_exists( 'd3downloadsTextSanitizer' ) )
 		}
 
 		// override
-		function makeTboxData4Show( $text )
+		function makeTboxData4Show( $text , $smiley=0 )
 		{
 			return $this->toShow( $text ) ;
 		}
@@ -337,7 +337,7 @@ if( ! class_exists( 'd3downloadsTextSanitizer' ) )
 			return $text;
 		}
 
-		function undoHtmlSpecialChars( $value )
+		function &undoHtmlSpecialChars( $value )
 		{
 			if ( is_array( $value ) ) {
 				return array_map( array( &$this, 'undoHtmlSpecialChars' ), $value ) ;

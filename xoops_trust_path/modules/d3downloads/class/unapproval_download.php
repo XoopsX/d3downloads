@@ -65,11 +65,11 @@ if( ! class_exists( 'unapproval_download' ) )
 			$mod_config =& $config_handler->getConfigsByCat( 0, $module->getVar( 'mid' ) );
 			$this->mod_config = $mod_config ;
 			if( ! empty( $id ) ) {
-				$this->GetMyDownload( $id ) ;
+				$this->GetMyDownload( '', $id ) ;
 			}
 		}
 
-		function GetMyDownload( $id )
+		function GetMyDownload( $whr='', $lid )
 		{
 			$sql = "SELECT $this->columns  FROM ".$this->table."  WHERE requestid='".$id."'";
 			$result = $this->db->query( $sql );
@@ -187,7 +187,7 @@ if( ! class_exists( 'unapproval_download' ) )
 			return $downdata ;
 		}
 
-		function Total_Num( $mode='' )
+		function Total_Num( $mode='', $cid=0, $all=0, $invisible=0, $intree=0 )
 		{
 			$sql = "SELECT COUNT( requestid ) FROM ".$this->table."";
 			switch( $mode ) {

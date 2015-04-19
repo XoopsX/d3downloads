@@ -1456,7 +1456,7 @@ if( ! class_exists( 'MyDownload' ) )
 			}
 		}
 
-		function mail_link( $id, $cid, $block=0 )
+		function mail_link( $id, $cid=1, $block=0 )
 		{
 			global $xoopsConfig ;
 
