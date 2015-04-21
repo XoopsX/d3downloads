@@ -305,7 +305,7 @@ if ( ! function_exists('d3download_delete_lid') ) {
 			$file2 = htmlspecialchars( $fil2 , ENT_QUOTES ) ;
 			$submitter = intval( $uid ) ;
 
-			// ï¿½uï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½Ì“ï¿½ï¿½eï¿½ï¿½ï¿½É”ï¿½ï¿½fï¿½vï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½Èê‡ï¿½Aï¿½ï¿½ï¿½eï¿½ï¿½ï¿½É”ï¿½ï¿½f
+			// u“Še‚ðƒ†[ƒU[‚Ì“Še”‚É”½‰fv‚ª—LŒø‚Èê‡A“Še”‚É”½‰f
 			if( $submitter > 0 && ! empty( $mod_config['plus_posts'] ) ) {
 				d3download_decrementPost( $submitter ) ;
 			}
