@@ -15,9 +15,11 @@ $download4assign = $category4assin = $category4post = $submitter_select = array(
 $cat_arg = "" ;
 
 // ‰{——E“Še‰Â”\‚ÈƒJƒeƒSƒŠŽæ“¾‚Ì€”õ
-$whr_cat = "cid IN (".implode(",", $user_access->can_read() ).")" ;
+$can_read_cids = $user_access->can_read();
+$can_post_cids = $user_access->can_post();
+$whr_cat = 'cid IN ( '.($can_read_cids? implode(',', $can_read_cids) : '0').')' ;
 $whr_cat4read = "d.".$whr_cat ;
-$whr_cat4post = "cid IN (".implode(",", $user_access->can_post() ).")" ;
+$whr_cat4post = 'cid IN ('.($can_post_cids? implode(',', $can_post_cids) : '0').')' ;
 
 if( is_object( $xoopsUser ) ) {
 	$xoops_isuser = true ;
