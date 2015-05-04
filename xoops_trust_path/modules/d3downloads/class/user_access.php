@@ -167,8 +167,9 @@ if( ! class_exists( 'user_access' ) )
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.can_post ='1' AND ( $whr4cat )" ;
 			$cat_ids = $this->get_cat_ids( $sql ) ;
+			$cat_ids = array_intersect( $cat_ids, $this->can_read() ) ;
 			if( empty( $cat_ids ) ) return array( 0 ) ;
-			else return array_intersect( $cat_ids, $this->can_read() ) ;
+			else return $cat_ids ;
 		}
 
 		function can_edit()
@@ -177,8 +178,9 @@ if( ! class_exists( 'user_access' ) )
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.can_edit ='1' AND ( $whr4cat )" ;
 			$cat_ids = $this->get_cat_ids( $sql ) ;
+			$cat_ids = array_intersect( $cat_ids, $this->can_read() ) ;
 			if( empty( $cat_ids ) ) return array( 0 ) ;
-			else return array_intersect( $cat_ids, $this->can_read() ) ;
+			else return $cat_ids ;
 		}
 
 		function can_delete()
@@ -186,6 +188,7 @@ if( ! class_exists( 'user_access' ) )
 			$whr4cat = $this->get_whr4cat() ;
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.can_delete ='1' AND ( $whr4cat )" ;
+			
 			$cat_ids = $this->get_cat_ids( $sql ) ;
 			if( empty( $cat_ids ) ) return array( 0 ) ;
 			else return array_intersect( $cat_ids, $this->can_read() ) ;
@@ -197,8 +200,9 @@ if( ! class_exists( 'user_access' ) )
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.post_auto_approved ='1' AND ( $whr4cat )" ;
 			$cat_ids = $this->get_cat_ids( $sql ) ;
+			$cat_ids = array_intersect( $cat_ids, $this->can_read() ) ;
 			if( empty( $cat_ids ) ) return array( 0 ) ;
-			else return array_intersect( $cat_ids, $this->can_read() ) ;
+			else return $cat_ids ;
 		}
 
 		function edit_approved()
@@ -207,8 +211,9 @@ if( ! class_exists( 'user_access' ) )
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.edit_auto_approved ='1' AND ( $whr4cat )" ;
 			$cat_ids = $this->get_cat_ids( $sql ) ;
+			$cat_ids = array_intersect( $cat_ids, $this->can_read() ) ;
 			if( empty( $cat_ids ) ) return array( 0 ) ;
-			else return array_intersect( $cat_ids, $this->can_read() ) ;
+			else return $cat_ids ;
 		}
 
 		function can_html()
@@ -217,8 +222,9 @@ if( ! class_exists( 'user_access' ) )
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.html ='1' AND ( $whr4cat )" ;
 			$cat_ids = $this->get_cat_ids( $sql ) ;
+			$cat_ids = array_intersect( $cat_ids, $this->can_read() );
 			if( empty( $cat_ids ) ) return array( 0 ) ;
-			else return array_intersect( $cat_ids, $this->can_read() ) ;
+			else return $cat_ids ;
 		}
 
 		function can_upload()
@@ -227,8 +233,9 @@ if( ! class_exists( 'user_access' ) )
 			// get categories
 			$sql = "".$this->sql4cat_ids." AND u.upload ='1' AND ( $whr4cat )" ;
 			$cat_ids = $this->get_cat_ids( $sql ) ;
+			$cat_ids = array_intersect( $cat_ids, $this->can_read() ) ;
 			if( empty( $cat_ids ) ) return array( 0 ) ;
-			else return array_intersect( $cat_ids, $this->can_read() ) ;
+			else return $cat_ids ;
 		}
 
 		function get_whr4cat( $permit=0 )
