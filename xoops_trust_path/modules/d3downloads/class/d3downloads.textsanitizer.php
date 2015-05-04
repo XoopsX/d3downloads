@@ -120,13 +120,13 @@ if( ! class_exists( 'd3downloadsTextSanitizer' ) )
 			return $this->toEdit( $text ) ;
 		}
 
-		// Legacy_TextFilter ‚©‚ç‚¨Ø‚è‚µ‚Ü‚µ‚½
+		// Legacy_TextFilter ï¿½ï¿½ï¿½ç‚¨ï¿½Ø‚è‚µï¿½Ü‚ï¿½ï¿½ï¿½
 		function toShow( $text )
 		{
 			return preg_replace( "/&amp;(#[0-9]+|#x[0-9a-f]+|[a-z]+[0-9]*);/i", '&\\1;', htmlspecialchars( $text, ENT_QUOTES ) ) ;
 		}
 
-		// Legacy_TextFilter ‚©‚ç‚¨Ø‚è‚µ‚Ü‚µ‚½
+		// Legacy_TextFilter ï¿½ï¿½ï¿½ç‚¨ï¿½Ø‚è‚µï¿½Ü‚ï¿½ï¿½ï¿½
 		function toEdit( $text )
 		{
 			$text = $this->undoHtmlSpecialChars( $text ) ;
@@ -193,7 +193,7 @@ if( ! class_exists( 'd3downloadsTextSanitizer' ) )
 			}
 		}
 
-		// PHP4 ‚Å‚Í htmLawedAPHP5 ‚Å‚Í HTMLPurifier ‚ğ—˜—p
+		// PHP4 ï¿½Å‚ï¿½ htmLawedï¿½APHP5 ï¿½Å‚ï¿½ HTMLPurifier ï¿½ğ—˜—p
 		function myFilter( $text )
 		{
 			if( substr( PHP_VERSION , 0 , 1 ) != 4 ) {
@@ -239,7 +239,7 @@ if( ! class_exists( 'd3downloadsTextSanitizer' ) )
 			return $config ;
 		}
 
-		// PHP4 —p‚ÌƒzƒƒCƒgƒŠƒXƒg
+		// PHP4 ï¿½pï¿½Ìƒzï¿½ï¿½ï¿½Cï¿½gï¿½ï¿½ï¿½Xï¿½g
 		function AllowedList()
 		{
 			return array(
@@ -340,10 +340,11 @@ if( ! class_exists( 'd3downloadsTextSanitizer' ) )
 		function &undoHtmlSpecialChars( $value )
 		{
 			if ( is_array( $value ) ) {
-				return array_map( array( &$this, 'undoHtmlSpecialChars' ), $value ) ;
+				$ret = array_map( array( &$this, 'undoHtmlSpecialChars' ), $value ) ;
 			} else {
-				return str_replace( array( '&lt;' , '&gt;' , '&amp;' , '&quot;' , '&#039;' ), array( '<' , '>' , '&' , '"' , "'" ), $value ) ;
+				$ret = str_replace( array( '&lt;' , '&gt;' , '&amp;' , '&quot;' , '&#039;' ), array( '<' , '>' , '&' , '"' , "'" ), $value ) ;
 			}
+			return $ret;
 		}
 
 		function makeSerializeData( $value )
