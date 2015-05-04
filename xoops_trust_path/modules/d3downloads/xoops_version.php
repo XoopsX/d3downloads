@@ -11,7 +11,7 @@ $constpref = '_MI_' . strtoupper( $mydirname ) ;
 
 $modversion['name'] = $mydirname ;
 $modversion['version'] = 1.49 ;
-$modversion['detailed_version'] = "1.49.3" ;
+$modversion['detailed_version'] = "1.49.4" ;
 $modversion['description'] = constant($constpref.'_DESC') ;
 $modversion['credits'] = "Xoops X(ten) Team and photosite";
 $modversion['author'] = "Xoops X(ten) Team based by photosite(http://www.photositelinks.com/)" ;
