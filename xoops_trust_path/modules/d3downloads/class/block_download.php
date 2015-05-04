@@ -110,7 +110,7 @@ if( ! class_exists( 'block_download' ) )
 			}
 		}
 
-		function get_downdata( $result, $title_size, $date_format )
+		function get_downdata( $result, $title_size = '', $date_format = '' )
 		{
 			global $xoopsConfig ;
 
