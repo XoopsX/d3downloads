@@ -47,22 +47,22 @@ function change_by_fade_Out( params ){
 
 function disabled_true( params ){
 	$j.each( arguments, function(){
-		$dom( this ).attr( 'disabled', true ) ;
+		$dom( this ).prop( 'disabled', true ) ;
 	});
 }
 
 function disabled_false( params ){
 	$j.each( arguments, function(){
-		$dom( this ).attr( 'disabled', false ) ;
+		$dom( this ).prop( 'disabled', false ) ;
 	});
 }
 
 function disabled_on_off( params ){
 	$j.each( arguments, function(){
 		var targetDom = $dom( this ) ;
-		var elevalue  = ( targetDom.attr( 'disabled' ) == '' ) ? false : targetDom.attr( 'disabled' ) ;
+		var elevalue  = ( targetDom.prop( 'disabled' ) == '' ) ? false : targetDom.prop( 'disabled' ) ;
 		var value     = ( elevalue == true ) ? false : true ;
-		targetDom.attr( 'disabled', value ) ;
+		targetDom.prop( 'disabled', value ) ;
 	});
 }
 
@@ -140,7 +140,7 @@ function selectlist_appendText( targetId, selectId ){
 	if ( is_xoopsdhtml( targetId ) ) {
 		d3downloadsInsertText( $id( targetId ), $value( selectId ) ) ;
 		focus_in( targetId ) ;
-	} else if ( typeof FCKeditorAPI == 'object' ) {
+	} else if ( typeof FCKeditorAPI == 'object' || typeof CKEDITOR == 'object' ) {
 		fckeditor_insert( $value( selectId ) )
 	}
 }
@@ -152,10 +152,10 @@ function selectlist_InsertText( targetId, selectId, delimiterId, delimiter ){
 
 	if ( selected_val != '' ) {
 		if ( target_val == '' ) {
-			targetDom.attr( 'value', selected_val ) ;
+			targetDom.val( selected_val ) ;
 		} else {
 			var selectdelimiter = ( delimiterId == '' ) ? delimiter : $value( delimiterId ) ;
-			targetDom.attr( 'value', target_val + selectdelimiter + selected_val ) ;
+			targetDom.val( target_val + selectdelimiter + selected_val ) ;
 		}
 	}
 	return ;
@@ -232,7 +232,7 @@ function appendCode_by_shots_dir( shots_dir, targetId, selected_val, align ){
 	if ( is_xoopsdhtml( targetId ) ) {
 		var addCode = '[siteimg align=' + align + ']' + shots_dir + selected_val + '[/siteimg]' ;
 		d3downloadsInsertText( $id( targetId ), addCode ) ;
-	} else if ( typeof FCKeditorAPI == 'object' ) {
+	} else if ( typeof FCKeditorAPI == 'object' || typeof CKEDITOR == 'object') {
 		var addCode = '<img src="'+ xoopsUrl + '/' + shots_dir + selected_val +'" align="' + align + '" />' ;
 		fckeditor_insert( addCode ) ;
 	}
@@ -243,7 +243,7 @@ function appendCode_by_album( targetId, selected_val, align ){
 		if ( is_xoopsdhtml( targetId ) ) {
 			var addCode = '[siteurl=' + photo + '][siteimg align=' + align + ']' + thumb + '[/siteimg][/siteurl]' ;
 		   	d3downloadsInsertText( $id( targetId ), addCode ) ;
-		} else if ( typeof FCKeditorAPI == 'object' ) {
+		} else if ( typeof FCKeditorAPI == 'object' || typeof CKEDITOR == 'object' ) {
 			var addCode = '<a href="' + xoopsUrl + '/' + photo + '" target="_blank" rel="lightbox[]"><img src="' + xoopsUrl + '/' + thumb + '" align="' + align + '" /></a>' ;
 			fckeditor_insert( addCode ) ;
 		}
@@ -276,7 +276,7 @@ function select_imgurl( imgId, selectId, targetId ){
 		targetDom.
 			focus().
 			css( target_style() ).
-			attr( 'value', $id( imgId ).src ).
+			val( $id( imgId ).src ).
 			blur( function(){
 				$j( this ).css( { border: eleborder, background: elesbackgroundColor } ) ;
 			});
@@ -481,7 +481,7 @@ function select_check( target ){
 }
 
 function sel_submitter_line_initialize(){
-	switch(  $j( '#sel_submitter' ).attr( 'checked' ) ) {
+	switch(  $j( '#sel_submitter' ).prop( 'checked' ) ) {
 		case false :
 			set_hide( 'submitter_select_line' ) ;
 			disabled_true( 'submitter' ) ;
@@ -560,7 +560,7 @@ function show_xoopsdhtml( id ){
 	if ( oEditor.EditMode == FCK_EDITMODE_WYSIWYG ) oEditor.SwitchEditMode() ;
 	textarea.
 		show().
-		attr( 'value' , fckeditor_value() ) ;
+		val( fckeditor_value() ) ;
 	if ( typeof XpWiki != 'object' ) textarea.height( $j( '#' + id + '___Frame' ).height() - 200 ) ;
 	desc_line_showhide( id ) ;
 }
@@ -576,10 +576,12 @@ function desc_line_showhide( id ){
 }
 
 function fckeditor_value(){
-	var value = '' ;
+	var value = '', oEditor;
 	if ( typeof FCKeditorAPI == 'object' ) {
-		var oEditor = FCKeditorAPI.GetInstance( description_id() ) ;
+		oEditor = FCKeditorAPI.GetInstance( description_id() ) ;
 		value = replace_pagebreak( oEditor.GetHTML() ) ;
+	} else if (typeof CKEDITOR == 'object' && (oEditor = CKEDITOR.instances[description_id()])) {
+		value = oEditor.getData();
 	}
 	return value ;
 }
@@ -591,9 +593,15 @@ function replace_pagebreak( value ){
 }
 
 function fckeditor_insert( value ){
-	var oEditor = FCKeditorAPI.GetInstance( description_id() ) ;
-	oEditor.InsertHtml( value ) ;
-	oEditor.Focus() ;
+	var oEditor;
+	if (typeof CKEDITOR == 'object' && (oEditor = CKEDITOR.instances[description_id()])) {
+		oEditor.insertHtml( value ) ;
+		oEditor.focus() ;
+	} else {
+		oEditor = FCKeditorAPI.GetInstance( description_id() ) ;
+		oEditor.InsertHtml( value ) ;
+		oEditor.Focus() ;
+	}
 }
 
 function fckeditor_sethtml(){
@@ -610,6 +618,7 @@ function fckeditor_remove(){
 }
 
 function editor_selector_initialize(){
+	if (typeof CKEDITOR == 'object') return;
 	var ajax_url = $value( 'ajax_url' ) ;
 	$j.get( ajax_url, 'type=is_fckeditor', function( request, status ) {
 		var selector = $j( '#editor_selector' ) ;
@@ -626,8 +635,7 @@ function show_editor_selector( selector ){
 }
 
 function is_xoopsdhtml( id ){
-	if ( ! is_fckeditor_frame() ) return true ;
-	else return ( $dom( id ).css( 'display' ) == 'none' ) ? false : true ;
+	return ( is_fckeditor_frame() || $dom( id ).css( 'display' ) == 'none' ) ? false : true ;
 }
 
 function is_fckeditor_frame(){
@@ -703,7 +711,7 @@ $j( function($){
     $( '#file_url_onoff' ).click( function(){
 		change_show_hide( 'post_url' , 'upload' , 'max_submit_size' , 'submit_size_desc' ) ;
 		disabled_on_off( 'url' , 'url_hidden' , ':file' ) ;
-		if( this.checked ) $( '#url_hidden' ).attr( 'value' , $value( 'url' ) ) ;
+		if( this.checked ) $( '#url_hidden' ).val( $value( 'url' ) ) ;
     });
 
 	$.each( $( ':checkbox' ), function(){

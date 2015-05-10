@@ -177,10 +177,29 @@
 				<{if $mod_config.body_editor != "common_fckeditor" && $canhtml}><br /><div id="editor_selector" style="display:none;"></div><{/if}>
 			</td>
 			<td class="d3downloads_even">
+				<{assign var=html value=$download.html}>
+				<{assign var=br value=$download.br}>
+				<{assign var=xcode value=$download.xcode}>
 				<{if $body_wysiwyg && $canhtml}>
 					<{$body_wysiwyg}><br />
 				<{else}>
-					<{xoopsdhtmltarea name="desc" id="desc" cols="60" rows="15" value=$download.description"}><br />
+					<{if $smarty.const.LEGACY_BASE_VERSION|version_compare:'2.2':'>='}>
+						<{if $canhtml && ($html || !$download.description)}>
+							<{assign var=editor value=html}>
+						<{elseif $xcode}>
+							<{assign var=editor value=bbcode}>
+						<{else}>
+							<{assign var=editor value=none}>
+						<{/if}>
+						<{xoops_dhtmltarea class=$editor name=desc id=desc cols=60 rows=15 value=$download.description|htmlspecialchars_decode:$smarty.const.ENT_QUOTES editor=$editor}>
+						<{if !$download.description && $editor == 'html'}>
+							<{assign var=html value=1}>
+							<{assign var=br value=0}>
+							<{assign var=xcode value=0}>
+						<{/if}>
+					<{else}>
+						<{xoopsdhtmltarea name="desc" id="desc" cols="60" rows="15" value=$download.description"}><br />
+					<{/if}>
 				<{/if}>
 				<div class="d3downloads_submit_help">
 					<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DESCRIPTION_DESC}>
@@ -200,14 +219,14 @@
 			<td class="d3downloads_even">
 				<{if $canhtml}>
 					<label for="html"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_HTML}></label>
-					<input type="checkbox" name="html" id="html" value="1" <{if $download.html}>checked="checked"<{/if}> /><br />
+					<input type="checkbox" name="html" id="html" value="1" <{if $html}>checked="checked"<{/if}> /><br />
 				<{/if}>
 				<label for="smiley"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_SMILEY}></label>
 				<input type="checkbox" name="smiley" id="smiley" value="1" <{if $download.smiley}>checked="checked"<{/if}> /><br />
 				<label for="br"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_BR}></label>
-				<input type="checkbox" name="br" id="br" value="1" <{if $download.br}>checked="checked"<{/if}> /><br />
+				<input type="checkbox" name="br" id="br" value="1" <{if $br}>checked="checked"<{/if}> /><br />
 				<label for="xcode"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_XCODE}></label>
-				<input type="checkbox" name="xcode" id="br" value="1" <{if $download.xcode}>checked="checked"<{/if}> /><br />
+				<input type="checkbox" name="xcode" id="xcode" value="1" <{if $xcode}>checked="checked"<{/if}> /><br />
 				<{if $xoops_isuser && ! $auto_approved}>
 					<label for="notify"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_NOTIFY}></label>
 					<input type="checkbox" name="notify" id="notify" value="1" checked="checked" />
