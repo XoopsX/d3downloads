@@ -58,7 +58,7 @@ if( ! class_exists( 'Upload_Validate' ) )
 		function extension_head()
 		{
 			return array(
-				'pdf' => '/^%PDF-\d[\d\.]+[\r\n]%/',
+				'pdf' => '/^%PDF-\d[\d\.]+/',
 				'ppt' => '/\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1\x00/',
 				'xls' => '/\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1\x00/',
 				'bmp' => '/^BM/',
