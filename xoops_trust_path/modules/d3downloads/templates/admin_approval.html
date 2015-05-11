@@ -132,7 +132,26 @@
 				<br /><div id="editor_selector" style="display:none;"></div>
 			</td>
 			<td class="even">
-				<{xoopsdhtmltarea name="description" cols="60" rows="15" value=$unapproval.description"}>
+				<{assign var=html value=$unapproval.html}>
+				<{assign var=br value=$unapproval.br}>
+				<{assign var=xcode value=$unapproval.xcode}>
+				<{if $smarty.const.LEGACY_BASE_VERSION|version_compare:'2.2':'>='}>
+					<{if $canhtml && ($html || !$download.description)}>
+						<{assign var=editor value=html}>
+					<{elseif $xcode}>
+						<{assign var=editor value=bbcode}>
+					<{else}>
+						<{assign var=editor value=none}>
+					<{/if}>
+					<{xoops_dhtmltarea class=$editor name=description id=description cols=60 rows=15 value=$unapproval.description|htmlspecialchars_decode:$smarty.const.ENT_QUOTES editor=$editor}>
+					<{if !$download.description && $editor == 'html'}>
+						<{assign var=html value=1}>
+						<{assign var=br value=0}>
+						<{assign var=xcode value=0}>
+					<{/if}>
+				<{else}>
+					<{xoopsdhtmltarea name="description" id="description" cols="60" rows="15" value=$unapproval.description"}><br />
+				<{/if}>
 				<div style="font-size:  90%;background: #EFEFEF;color:inherit;border: 1px inset #CCC;padding: 2px;width: 90%;">
 					<{$smarty.const._MD_D3DOWNLOADS_SUBMIT_DESCRIPTION_DESC}>
 				</div>
@@ -180,13 +199,13 @@
 			<td class="head"><label for="option"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_OPTION}></label></td>
 			<td class="even">
 				<label for="html"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_HTML}></label>
-				<input type="checkbox" name="html" id="html" value="1" <{if $unapproval.html}>checked="checked"<{/if}> /><br />
+				<input type="checkbox" name="html" id="html" value="1" <{if $html}>checked="checked"<{/if}> /><br />
 				<label for="smiley"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_SMILEY}></label>
 				<input type="checkbox" name="smiley" id="smiley" value="1" <{if $unapproval.smiley}>checked="checked"<{/if}> /><br />
 				<label for="br"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_BR}></label>
-				<input type="checkbox" name="br" id="br" value="1" <{if $unapproval.br}>checked="checked"<{/if}> /><br />
+				<input type="checkbox" name="br" id="br" value="1" <{if $br}>checked="checked"<{/if}> /><br />
 				<label for="xcode"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_XCODE}></label>
-				<input type="checkbox" name="xcode" id="br" value="1" <{if $unapproval.xcode}>checked="checked"<{/if}> /><br />
+				<input type="checkbox" name="xcode" id="xcode" value="1" <{if $xcode}>checked="checked"<{/if}> /><br />
 				<label for="visible"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_VISIBLE}></label>
 				<input type="checkbox" name="visible" id="visible" value="1" <{if $unapproval.visible}>checked="checked"<{/if}> /><br /> 
 				<label for="comment"><{$smarty.const._MD_D3DOWNLOADS_SUBMIT_COMMENT}></label>
